@@ -1,0 +1,15 @@
+services:
+  postgres:
+    image: 'postgres:16-alpine'
+    container_name: 'engine-postgres'
+    environment:
+      - 'POSTGRES_DB=content_engine_db'
+      - 'POSTGRES_USER=engine_user'
+      - 'POSTGRES_PASSWORD=secret'
+    ports:
+      - "5433:5432"
+    volumes:
+      - engine_postgres_data:/var/lib/postgresql/data
+
+volumes:
+  engine_postgres_data:
