@@ -33,6 +33,11 @@ public class GlobalExceptionHandler {
         return buildProblemDetail(HttpStatus.BAD_REQUEST, "Business Rule Violation", ex.getMessage(), request);
     }
 
+    @ExceptionHandler(ForbiddenOperationException.class)
+    public ProblemDetail handleForbiddenOperation(ForbiddenOperationException ex, HttpServletRequest request) {
+        return buildProblemDetail(HttpStatus.FORBIDDEN, "Access Denied", ex.getMessage(), request);
+    }
+
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public ProblemDetail handleValidationErrors(MethodArgumentNotValidException ex, HttpServletRequest request) {
         ProblemDetail problemDetail = buildProblemDetail(
