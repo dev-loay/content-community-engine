@@ -55,6 +55,14 @@ public class GlobalExceptionHandler {
         return problemDetail;
     }
 
+    @ExceptionHandler(org.springframework.web.method.annotation.MethodArgumentTypeMismatchException.class)
+    public ProblemDetail handleTypeMismatch(
+            org.springframework.web.method.annotation.MethodArgumentTypeMismatchException ex,
+            HttpServletRequest request) {
+        String detail = String.format("Invalid value '%s' for parameter '%s'", ex.getValue(), ex.getName());
+        return buildProblemDetail(HttpStatus.BAD_REQUEST, "Invalid Parameter", detail, request);
+    }
+
     @ExceptionHandler(Exception.class)
     public ProblemDetail handleGenericException(Exception ex, HttpServletRequest request) {
         log.error("Unexpected error occurred at {}: ", request.getRequestURI(), ex);
