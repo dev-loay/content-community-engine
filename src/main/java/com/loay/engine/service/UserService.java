@@ -31,7 +31,7 @@ public class UserService {
             throw new DuplicateResourceException("User", "email", request.email());
         }
 
-        User user = userRepository.save(userMapper.toEntity(request));
+        User user = userRepository.saveAndFlush(userMapper.toEntity(request));
         return userMapper.toResponse(user);
     }
 
