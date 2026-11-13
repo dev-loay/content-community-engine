@@ -21,3 +21,10 @@ spring:
       enabled: true
       baseline-on-migrate: true
       locations: classpath:db/migration
+
+  data:
+    web:
+      pageable:
+        serialization-mode: via-dto
+        default-page-size: 10
+        max-page-size: 50
